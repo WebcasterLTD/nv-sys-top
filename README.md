@@ -115,6 +115,7 @@ MIT, see [LICENSE](LICENSE).
 ## Author
 
 **Corneliu Ticu**, managing partner, [Webcaster Ltd](https://github.com/WebcasterLTD)
-corneliu.ticu@gmail.com
+
+[corneliu.ticu@gmail.com](mailto:corneliu.ticu@gmail.com)
 
 Questions, ideas or interest in this project: write to me directly.
