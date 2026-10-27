@@ -1,0 +1,22 @@
+name: build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        cc: [gcc, clang]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install ncurses
+        run: sudo apt-get update && sudo apt-get install -y libncurses-dev pkg-config clang
+      - name: Build
+        run: make CC=${{ matrix.cc }} CFLAGS="-O2 -Wall -Wextra -Werror"
+      - name: Smoke test (no GPU on the runner)
+        run: |
+          ./nv-sys-top -V
+          ./nv-sys-top -b -n 5 -d 0.5

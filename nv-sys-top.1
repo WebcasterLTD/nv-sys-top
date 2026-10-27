@@ -1,0 +1,74 @@
+.TH NV-SYS-TOP 1 "October 2026" "nv-sys-top 1.0.0" "User Commands"
+.SH NAME
+nv-sys-top \- htop-style system monitor with NVIDIA GPUs in the same view
+.SH SYNOPSIS
+.B nv-sys-top
+[\fB\-d\fR \fISECONDS\fR] [\fB\-g\fR] [\fB\-s\fR \fIcpu\fR|\fImem\fR|\fIvram\fR|\fIgpu\fR] [\fB\-b\fR [\fB\-n\fR \fIROWS\fR]]
+.SH DESCRIPTION
+.B nv-sys-top
+shows a meter for each CPU core, memory, swap and load, a status block for
+every NVIDIA GPU (load, VRAM, temperature, power, fan, SM clock), and one
+process list with CPU, RAM, GPU index, per-process GPU load and VRAM.
+.PP
+System data is read from
+.IR /proc .
+GPU data comes from NVML
+.RI ( libnvidia-ml.so.1 ),
+which is loaded at run time. Without it, the GPU part is left out.
+.SH OPTIONS
+.TP
+.BI \-d " SECONDS"
+Refresh interval, 0.5 to 10 seconds (default 1.0).
+.TP
+.B \-g
+Show only processes that use a GPU.
+.TP
+.BI \-s " KEY"
+Sort by
+.IR cpu ,
+.IR mem ,
+.I vram
+or
+.IR gpu .
+.TP
+.B \-b
+Batch mode: print one snapshot as plain text and exit.
+.TP
+.BI \-n " ROWS"
+Number of process rows in batch mode (default 20, 0 for all).
+.TP
+.B \-h
+Show help.
+.TP
+.B \-V
+Show version.
+.SH KEYS
+.TP
+.B c m g u
+Sort by CPU, RAM, VRAM, GPU load.
+.TP
+.B v
+Toggle GPU processes only.
+.TP
+.B /
+Filter by command line; empty input clears the filter.
+.TP
+.B Up Down PgUp PgDn Home End
+Move the cursor. Once moved, the cursor follows its process; Home pins it to the top.
+.TP
+.B k K
+Send SIGTERM or SIGKILL to the selected process, after a y/N prompt.
+.TP
+.B + \-
+Slower or faster refresh.
+.TP
+.B q Esc
+Quit.
+.SH FILES
+.I /proc/stat /proc/meminfo /proc/loadavg /proc/uptime /proc/[pid]/stat /proc/[pid]/cmdline
+.br
+.I libnvidia-ml.so.1
+.SH SEE ALSO
+.BR htop (1),
+.BR nvidia-smi (1),
+.BR proc (5)
