@@ -4,21 +4,11 @@ An htop-style terminal monitor that shows your CPUs, memory **and NVIDIA GPUs**
 in one screen, with a single process list that has CPU, RAM, GPU load and VRAM
 side by side.
 
-```
-  0[||||                         7%]  14[||                            3%]
-  1[                             0%]  15[                              0%]
-  ...
-Mem[|||||||||||||     19.8G/62.6G] CPU  10%  Load 3.07 4.29 6.62  Up 0d 13:09  Tasks 627
-Swp[|||||||||||||||||| 856.8M/2.0G]
-GPU0 RTX 5070 Ti  68°C  181/300W  fan 51%  2850MHz
-Util[||||||||||||||||||||||||100%] VRAM[|||||||||||||||||||||||15.8/15.9G]
-GPU1 RTX 5070 Ti  61°C  144/300W  fan 32%  2790MHz
-Util[||||||||||||||||||||||||100%] VRAM[|||||||||||||||||||||||15.1/15.9G]
-    PID USER      S  CPU%  MEM%     RES  GPU  GPU%    VRAM  COMMAND
-3109934 alice     R 101.3   4.9    3.0G    0    99   14.6G  python serve.py --gpu 0
-3109935 alice     R 100.3   4.9    3.0G    1    99   14.6G  python serve.py --gpu 1
-   4429 root      S   2.0   0.2  114.2M  0,1     0  360.1M  /usr/lib/xorg/Xorg vt2
-```
+![nv-sys-top on 28 cores and two RTX 5070 Ti, running a vision model split across both cards](docs/screenshot.png)
+
+*28 CPU cores and two RTX 5070 Ti. A vision model is split across both cards:
+each worker shows its own GPU, its own GPU load and 14.6 GB of VRAM, in the
+same list as everything else on the machine.*
 
 - One native binary written in C, about 40 KB. It needs ncurses and libc,
   nothing else.
